@@ -1,0 +1,17 @@
+.home-container {
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.empty-view-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 16px;
+}
+
+.empty-view-text {
+  color: #7e808c;
+  font-size: 16px;
+  margin: 0;
+}

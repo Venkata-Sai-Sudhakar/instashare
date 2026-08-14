@@ -1,0 +1,92 @@
+.post-item {
+  list-style-type: none;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.post-author-profile-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post-username-link {
+  text-decoration: none;
+  color: #262626;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.post-image {
+  width: 100%;
+  display: block;
+  max-height: 600px;
+  object-fit: cover;
+}
+
+.post-actions-container {
+  padding: 10px 12px 4px;
+}
+
+.icons-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  color: #262626;
+}
+
+.likes-count-text {
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0;
+}
+
+.post-caption {
+  padding: 0 12px 6px;
+  font-size: 14px;
+  margin: 0;
+  color: #262626;
+}
+
+.post-comments-list {
+  padding: 0 12px 6px;
+  margin: 0;
+}
+
+.post-comment-item {
+  list-style-type: none;
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #262626;
+}
+
+.post-comment-username {
+  font-weight: bold;
+}
+
+.post-created-at {
+  padding: 0 12px 12px;
+  font-size: 11px;
+  color: #7e808c;
+}

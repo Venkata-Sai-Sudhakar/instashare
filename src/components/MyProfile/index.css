@@ -1,0 +1,11 @@
+.my-profile-container {
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.profile-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 16px;
+}
