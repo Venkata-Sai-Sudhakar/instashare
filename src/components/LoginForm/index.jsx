@@ -34,38 +34,11 @@ const LoginForm = () => {
 
   const submitForm = async event => {
     event.preventDefault()
-    
-    // Valid test credentials
-    const testCredentials = [
-      { username: 'demo', password: 'demo123' },
-      { username: 'aakash', password: 'sky@007' },
-      { username: 'agastya', password: 'myth#789' },
-      { username: 'advika', password: 'world@5' },
-      { username: 'binita', password: 'modest*6' },
-      { username: 'chetan', password: 'vigor$life' },
-      { username: 'deepak', password: 'lightstar@1' },
-      { username: 'harshad', password: 'joy@85' },
-      { username: 'kapil', password: 'moon$008' },
-      { username: 'rahul', password: 'rahul@2021' },
-      { username: 'shravya', password: 'musical#stone' },
-      { username: 'saira', password: 'princess@9' },
-    ]
-    
-    const isValidTestCredential = testCredentials.some(
-      cred => cred.username === username && cred.password === password
-    )
-    
-    if (isValidTestCredential) {
-      // Generate mock JWT token for test credentials
-      const mockToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IiR7dXNlcm5hbWV9In0.mock_token_${username}`
-      onSubmitSuccess(mockToken)
-      return
-    }
-    
     const userDetails = {username, password}
-    
-    // Try with proxy first
-    let url = '/api/insta-share/login'
+
+    // The Vite proxy avoids CORS in development. The direct endpoint remains
+    // available when the app is served without that proxy.
+    let url = '/api/login'
     let options = {
       method: 'POST',
       headers: {
@@ -77,9 +50,9 @@ const LoginForm = () => {
     try {
       let response = await fetch(url, options)
       
-      // If proxy fails with 403/404, try direct URL
+      // If the development proxy is unavailable, use the documented API URL.
       if (!response.ok && (response.status === 403 || response.status === 404)) {
-        url = 'https://apis.ccbp.in/insta-share/login'
+        url = 'https://apis.ccbp.in/login'
         options = {
           method: 'POST',
           headers: {

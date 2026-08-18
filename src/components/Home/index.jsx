@@ -11,12 +11,14 @@ const Home = () => {
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial)
   const [postsList, setPostsList] = useState([])
   const [storiesList, setStoriesList] = useState([])
-  const [searchInput, setSearchInput] = useState('')
-
-  const getHomePosts = useCallback(async () => {
+  const getHomePosts = useCallback(async (searchTerm = '') => {
     setApiStatus(apiStatusConstants.inProgress)
     const jwtToken = Cookies.get(JWT_COOKIE_KEY)
-    const url = '/api/insta-share/posts'
+    const query = searchTerm.trim()
+      ? `?search=${encodeURIComponent(searchTerm.trim())}`
+      : ''
+    const postsUrl = `/api/insta-share/posts${query}`
+    const storiesUrl = '/api/insta-share/stories'
     const options = {
       method: 'GET',
       headers: {
@@ -25,17 +27,16 @@ const Home = () => {
       },
     }
     try {
-      const response = await fetch(url, options)
-      if (response.ok) {
-        const data = await response.json()
-        const {posts, stories} = data
-        setPostsList(posts || [])
-        setStoriesList(stories || [])
-        setApiStatus(apiStatusConstants.success)
-      } else if (response.status === 401 || response.status === 403) {
-        // For demo/testing - show empty state
-        setPostsList([])
-        setStoriesList([])
+      const [postsResponse, storiesResponse] = await Promise.all([
+        fetch(postsUrl, options),
+        fetch(storiesUrl, options),
+      ])
+
+      if (postsResponse.ok && storiesResponse.ok) {
+        const postsData = await postsResponse.json()
+        const storiesData = await storiesResponse.json()
+        setPostsList(postsData.posts || [])
+        setStoriesList(storiesData.users_stories || [])
         setApiStatus(apiStatusConstants.success)
       } else {
         setApiStatus(apiStatusConstants.failure)
@@ -51,15 +52,7 @@ const Home = () => {
   }, [getHomePosts])
 
   const handleSearch = searchTerm => {
-    setSearchInput(searchTerm)
-    if (searchTerm.trim() === '') {
-      getHomePosts()
-    } else {
-      const filteredPosts = postsList.filter(post =>
-        post.caption.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-      setPostsList(filteredPosts)
-    }
+    getHomePosts(searchTerm)
   }
 
   const emptyView = (

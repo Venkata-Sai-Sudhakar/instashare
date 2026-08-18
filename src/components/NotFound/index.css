@@ -4,24 +4,25 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  background: #fafafa;
   padding: 16px;
   text-align: center;
 }
 
 .not-found-image {
-  width: 160px;
-  margin-bottom: 24px;
+  width: 280px;
+  margin-bottom: 28px;
 }
 
 .not-found-heading {
-  font-size: 22px;
+  font-size: 28px;
   color: #262626;
   margin: 0 0 8px;
 }
 
 .not-found-text {
   color: #7e808c;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0 0 20px;
 }
 
